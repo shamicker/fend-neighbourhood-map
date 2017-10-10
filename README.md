@@ -1,3 +1,4 @@
-# TEMPLATES
+# Neighbourhood Map
 
-__Instead of looking them up for every project, they're at my fingertips.__
+_A project created from scratch for Udacity's Front End Web Developer NanoDegree course._
+
