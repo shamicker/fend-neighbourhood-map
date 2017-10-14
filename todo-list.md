@@ -2,60 +2,60 @@
 
 ## RUBRIC
 #### Interface Design
-[ ] Responsiveness
+- [ ] Responsiveness
   - all application components render on-screen in a responsive manner.
 
-[ ] Usability
+- [ ] Usability
   - all app components are usable across modern desktop, tablet, and phone browsers.
 
 #### App Functionality
-[ ] Filter Locations
+- [ ] Filter Locations
   - includes a text input field or dropdown menu that filters the map markers and list items to locations matching the text input or selection. Filter function runs error-free.
 
-[ ] List View
+- [ ] List View
   - A list-view of location names is provided which displays all locations by default, and displays the filtered subset of locations when a filter is applied.
   - Clicking a location on the list displays unique information about the location, and animates its associated map marker.
   - List functionality is responsive and runs error free.
 
-[ ] Map and Markers
+- [ ] Map and Markers
   - Map displays all location markers by default, and displays the filtered subset of location markers when a filter is applied.
   - Clicking a marker displays unique information about a location in either an `infoWindow` or `DOM` element.
   - Markers should animate when clicked (eg. bouncing, colour change).
   - Any additional custom functionality provided in the app functions error-free.
 
 #### App Architecture
-[ ] Proper Use of `Knockout`
+- [ ] Proper Use of `Knockout`
   - Code is properly separated based upon `Knockout` best practices
   - `Knockout` should not be used to handle the Google Maps API.
   - There are at least 5 location in the model. These may be hard-coded or retrieved from a data API.
 
 #### Asynchronous Data Usage
-[ ] Asynchronous API Requests
+- [ ] Asynchronous API Requests
   - Application utilizes the `Google Maps API` and at least 1 non-Google 3rd party API.
   - All data requests are retrieved in an asynchronous manner.
 
-[ ] Error Handling
+- [ ] Error Handling
   - Data requests that fail are handled gracefully using common fallback techniques.
 
 #### Location Details Functionality
-[ ] Additional Location Data
+- [ ] Additional Location Data
   - Functionality providing additional data about a location is providd and sourced from a 3rd party API. Information can be provided either in the markers' `infoWindow`, or in an `HTML` element in the `DOM`.
   - Provide attribution for the source of additional data, on screen AND in your README.
 
-[ ] Error Free
+- [ ] Error Free
   - Application runs without errors.
 
-[ ] Usability
+- [ ] Usability
   - Functionality is presented in a usable and responsive manner.
 
 #### Documentation
-[ ] `README`
+- [ ] `README`
   - A `README` file is included detailing all steps required to successfully run the application.
 
-[ ] Comments
+- [ ] Comments
   - Comments are present and effectively explain longer code procedures.
 
-[ ] Code Quality
+- [ ] Code Quality
   - Code is formatted with consistent, logical, and easy-to-read formatting as described in the [Udacity JavaScript Style Guide](http://udacity.github.io/frontend-nanodegree-styleguide/javascript.html).
   - If build tools (Grunt/Gulp) are used, both source and production code are submitted in the same repo in separate directories, usually named `src` and `dist`.
 
