@@ -1,0 +1,25 @@
+html,
+body {
+    box-sizing: border-box;
+    height: 100%;
+}
+
+h1,
+h3 {
+    text-align: center;
+}
+
+.instructions {
+    border: 2px solid limegreen;
+}
+
+.menu {
+    border: 2px solid orange;
+}
+
+#map {
+    border: 2px solid blue;
+    /*display: block;*/
+    /*height: 80%;*/
+    height: 500px;
+}
