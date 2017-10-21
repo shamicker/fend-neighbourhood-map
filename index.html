@@ -10,12 +10,30 @@
     <link rel="stylesheet" href="src/css/style.css">
     <link rel="shortcut icon" href="src/images/standard_Ma4_12.ico" type="image/x-icon">
 </head>
-<body>
-    <h1>Map of My Neighbourhood (of the World)</h1>
-    <h3>eh?</h3>
-    <div class="instructions">Instructions here.</div>
-    <div class="menu">Menu here.</div>
+<body class="body">
+    <h1 class="header" data-bind="text: title">Map of My Neighbourhood (of the World)</h1>
+    <div class="instructions" data-bind="text: instructions">Instructions here.</div>
+    <div class="menu">
+        <div class="provinces">
+            <p data-bind="text: provinceSearch"></p>
+            <input class='search'>
+            <ul data-bind="foreach: provinceNames">
+                <li data-bind="text: $data, click: setProvince, style: {
+                    backgroundColor: currentProvince() === $data ? 'red' : 'white',
+                    color: currentProvince() === $data ? 'white' : 'black' }"></li>
+            </ul>
+        </div>
+        <hr>
+        <div class="species">
+            <p data-bind="text: speciesSearch"></p>
+            <input class='search'>
+            <!-- <ul data-bind="foreach: species"> -->
+                <!-- <li data-bind="text: $data"></li> -->
+            </ul>
+        </div>
+    </div>
     <div id="map">Map here.</div>
+    <div class="footer" data-bind="text: footer"></div>
 
     <script type='text/javascript' src='src/js/knockout-3.4.2.js'></script>
     <script type='text/javascript' src='src/js/app.js'></script>
