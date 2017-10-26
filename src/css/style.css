@@ -9,6 +9,10 @@ h3 {
     text-align: center;
 }
 
+input {
+    width: 80%;
+}
+
 ul {
     padding: 0px;
 }

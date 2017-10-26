@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Shauna's Neighbourhood</title>
 
@@ -11,32 +11,36 @@
     <link rel="shortcut icon" href="src/images/standard_Ma4_12.ico" type="image/x-icon">
 </head>
 <body class="body">
-    <h1 class="header" data-bind="text: title">Map of My Neighbourhood (of the World)</h1>
-    <div class="instructions" data-bind="text: instructions">Instructions here.</div>
+    <h1 class="header" data-bind="text: title">Map of My Neighbourhood</h1>
+    <div class="instructions" data-bind="text: instructions">Please enable JavaScript.</div>
     <div class="menu">
         <div class="provinces">
-            <p data-bind="text: provinceSearch"></p>
-            <input class='search'>
-            <ul data-bind="foreach: provinceNames">
-                <li data-bind="text: $data, click: setProvince, style: {
+            <p data-bind="text: provinceSearchText">Search for a location here.</p>
+            <input class='search' type="text" placeholder="ex. 'prov' or 'qu'">
+            <ul data-bind="foreach: shownLocations">
+                <li data-bind="text: $data.title, click: setProvince, style: {
                     backgroundColor: currentProvince() === $data ? 'red' : 'white',
                     color: currentProvince() === $data ? 'white' : 'black' }"></li>
             </ul>
         </div>
         <hr>
         <div class="species">
-            <p data-bind="text: speciesSearch"></p>
-            <input class='search'>
+            <p data-bind="text: speciesSearchText">Search for a species here.</p>
+            <input class='search' placeholder="ex. Ruby* or *woodpecker*">
             <!-- <ul data-bind="foreach: species"> -->
                 <!-- <li data-bind="text: $data"></li> -->
             </ul>
         </div>
     </div>
     <div id="map">Map here.</div>
-    <div class="footer" data-bind="text: footer"></div>
+    <div class="footer">
+        <p class="acknowledgement" data-bind="text: acknowledgement"></p>
+    </div>
 
     <script type='text/javascript' src='src/js/knockout-3.4.2.js'></script>
-    <script type='text/javascript' src='src/js/app.js'></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9L5FEyevyZ8lvPEgPfWyWnhe752kR0xo&callback=mapView.init"></script>
+    <script type='text/javascript' src='src/js/model.js'></script>
+    <script type='text/javascript' src='src/js/view.js'></script>
+    <script type='text/javascript' src='src/js/viewModels.js'></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9L5FEyevyZ8lvPEgPfWyWnhe752kR0xo&libraries=places&callback=staticView"></script>
 </body>
 </html>
