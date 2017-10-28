@@ -26,10 +26,18 @@ var MapView = function(locations){
     console.log(locations);
     var self = this;
 
-    self.markersList = ko.observableArray([]);
-
     // Initialize map and markers outside of viewMap function, and then call viewMap.
     var startPoint = model.mapData.mapStartPoint;
+    var defaultIcon = {
+        path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+        scale: 5,
+        fillColor: "#77FF33",
+        fillOpacity: 1.0,
+        strokeWeight: 1
+    };
+
+    self.markersList = ko.observableArray([]);
+
     // var allLocations = model.mapData.allLocations;
     var mapDiv = document.getElementById('map');
 
@@ -47,7 +55,8 @@ var MapView = function(locations){
             title: title,
             map: map,
             cursor: "pointer",
-            animation: google.maps.Animation.DROP
+            animation: google.maps.Animation.DROP,
+            icon: defaultIcon
         });
 
         // add listener for each marker to open infowindow
@@ -64,6 +73,4 @@ var MapView = function(locations){
         // add each marker to the list of markers
         self.markersList.push(marker);
     }
-
-    // nearby places search
 };
