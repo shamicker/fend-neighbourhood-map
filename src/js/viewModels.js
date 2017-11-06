@@ -25,28 +25,70 @@ var Translators = function(){
 
     // Set the initial current province and display the map.
     self.currentProvince = ko.observable(null);
-    self.provinceIsSelected = ko.observable(false);
+
     MapView( shownLocations() );
 
     // A function that switches the current province when clicked.
     self.setProvince = function(provinceClicked){
-        // If something is previously selected, close infowindow and default marker.
-        if (currentProvince() !== null) {
-            currentProvince().infowindow.close();
-            currentProvince().marker.icon.fillColor = defaultIcon;
-            currentProvince().marker.setMap(provinceClicked.marker.map);
+
+        // if current != null --> close current
+        if ( currentProvince() !== null ) {
+            self.currentProvince().infowindow.close();
+            self.currentProvince().marker.icon.fillColor = defaultIcon;
+            self.currentProvince().marker.setMap(provinceClicked.marker.map);
         }
 
-        // update to selected marker.
-        provinceClicked.marker.icon.fillColor = selectedIcon;
-        provinceClicked.marker.setMap(provinceClicked.marker.map);
+        // if clicked province was already the current province, deselect it
+        if ( currentProvince() === provinceClicked ) {
+            self.currentProvince(null);
+        } else if ( currentProvince() === null || provinceClicked != currentProvince() ){
+        // finally, if current == null OR if clicked != current, open clicked
+            provinceClicked.marker.icon.fillColor = selectedIcon;
+            provinceClicked.marker.setMap(provinceClicked.marker.map);
 
-        // update currentProvince
-        currentProvince(provinceClicked);
-        provinceIsSelected(true);
+            // update currentProvince
+            currentProvince(provinceClicked);
+            // provinceIsSelected(true);
 
-        // open infowindow
-        openInfowindow(provinceClicked);
+            // open infowindow
+            openInfowindow(provinceClicked);
+        }
+
+
+
+
+
+
+
+
+        // If an infowindow was already open, close it.
+        // if ( currentProvince() ) {
+        //     console.log( "not null (close)");
+        //     // If user clicks on the same marker again, close it & return.
+        //     if (currentProvince() === provinceClicked ) {
+        //         console.log( "same marker (close)" );
+        //         self.currentProvince().infowindow.close();
+        //         self.currentProvince().marker.icon.fillColor = defaultIcon;
+        //         self.currentProvince().marker.setMap(provinceClicked.marker.map);
+
+        //         // also update current province and selected province
+        //         self.currentProvince(null);
+        //         self.provinceIsSelected(false);
+        //     }
+        // // If nothing was selected, only open an infowindow.
+        // } else {
+        //     console.log( "open!" );
+        //     // update to selected marker.
+        //     provinceClicked.marker.icon.fillColor = selectedIcon;
+        //     provinceClicked.marker.setMap(provinceClicked.marker.map);
+
+        //     // update currentProvince
+        //     currentProvince(provinceClicked);
+        //     provinceIsSelected(true);
+
+        //     // open infowindow
+        //     openInfowindow(provinceClicked);
+        // }
     }
 
     self.filterProvinces = function(){

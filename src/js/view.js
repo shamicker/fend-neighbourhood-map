@@ -12,19 +12,11 @@ var staticView = function(){
     ko.applyBindings( Translators() );
 };
 
-
+// Google maps stuff
 // Class takes in a list of objects (provinces) to display.
 var MapView = function(locations){
     console.log("Map View Populated");
-    // Google maps stuff
-    // MAYBE THE MAPVIEW IS THE SAME AS CATVIEW - new instance created with each change in province/species list.
-    // TODO: Brainstorm: WHAT DOES THE MAP REQUIRE, OUTSIDE OF ITSELF?
-    // - mapDiv from DOM
-    // - maybe the start point
-    // - allLocations - all listed/ shown locations
-    // ANY TIME the province list is altered or selected, a new Map(locations) is called.
-    console.log(locations);
-    var self = this;
+    // console.log(locations);
 
     // Initialize map and markers outside of viewMap function, and then call viewMap.
     var startPoint = model.mapData.mapStartPoint;
@@ -36,9 +28,7 @@ var MapView = function(locations){
         strokeWeight: 1
     };
 
-    self.markersList = ko.observableArray([]);
-
-    // var allLocations = model.mapData.allLocations;
+    var markersList = [];
     var mapDiv = document.getElementById('map');
 
     var map = new google.maps.Map(mapDiv, startPoint);
@@ -71,6 +61,6 @@ var MapView = function(locations){
         locations[i].infowindow = infowindow;
 
         // add each marker to the list of markers
-        self.markersList.push(marker);
+        markersList.push(marker);
     }
 };
