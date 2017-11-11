@@ -16,7 +16,7 @@
     <div class="menu">
         <div class="provinces">
             <p data-bind="text: provinceSearchText">Search for a location here.</p>
-            <input class='search' type="text" placeholder="ex. 'prov' or 'qu'">
+            <input class='search' type="text" placeholder="ex. 'prov' or 'qu'" data-bind="textInput: provinceSearch" autocomplete="on">
             <ul data-bind="foreach: shownLocations">
                 <li data-bind="text: $data.title, click: setProvince, style: {
                     backgroundColor: currentProvince() === $data ? 'red' : 'white',

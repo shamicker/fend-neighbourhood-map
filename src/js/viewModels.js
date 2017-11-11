@@ -11,16 +11,17 @@ var Translators = function(){
 
     // LOCATION STUFF
     // Location - Observable data
-
     // TODO: if using database, need to push allLocations from database
-    // Creates a list of shown locations
-    self.shownLocations = ko.observableArray([]);
-    // self.icon = ko.observable(defaultIcon);
 
-    // Populates the shown locations
-    model.mapData.allLocations.forEach(function(location){
-        self.shownLocations.push( location );
-        // can I push latlng to another array, here, for the map points to read?
+    // the user's provincial search query
+    self.provinceSearch = ko.observable('');
+
+    // Creates a list of shown locations
+    self.shownLocations = ko.computed(function(){
+        var query = self.provinceSearch();
+        return model.mapData.allLocations.filter(function(location){
+            return location.title.toLowerCase().indexOf(query) >= 0;
+        });
     });
 
     // Set the initial current province and display the map.
