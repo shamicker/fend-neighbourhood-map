@@ -13,19 +13,31 @@ var Translators = function(){
     // Location - Observable data
     // TODO: if using database, need to push allLocations from database
 
+    // Set the initial current province and display the map.
+    self.currentProvince = ko.observable(null);
+
     // the user's provincial search query
     self.provinceSearch = ko.observable('');
 
     // Creates a list of shown locations
     self.shownLocations = ko.computed(function(){
         var query = self.provinceSearch();
-        return model.mapData.allLocations.filter(function(location){
+        var shown = model.mapData.allLocations.filter(function(location){
             return location.title.toLowerCase().indexOf(query) >= 0;
         });
+
+        if ( shown.length === 1 ){
+            self.setProvince(shown[0]);
+        } else if (shown.length > 1 && currentProvince() ){
+            console.log( shown.length );
+            self.setProvince( currentProvince() );
+        } else {
+            console.log( currentProvince() );
+        }
+
+        return shown;
     });
 
-    // Set the initial current province and display the map.
-    self.currentProvince = ko.observable(null);
 
     MapView( shownLocations() );
 
