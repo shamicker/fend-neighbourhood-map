@@ -14,25 +14,27 @@ var Translators = function(){
     // TODO: if using database, need to push allLocations from database
 
     // Set the initial current province and display the map.
-    self.currentProvince = ko.observable(null);
+    self.currentProvince = null;
+    self.setProvinceColor = ko.observable( null );
+    var previousProvince = currentProvince;
 
     // the user's provincial search query
     self.provinceSearch = ko.observable('');
 
     // Creates a list of shown locations
     self.shownLocations = ko.computed(function(){
+        var currprov = currentProvince;
         var query = self.provinceSearch();
         var shown = model.mapData.allLocations.filter(function(location){
             return location.title.toLowerCase().indexOf(query) >= 0;
         });
 
-        if ( shown.length === 1 ){
+        if (shown.length < 1){
+            self.setProvince( currprov );
+        } else if ( shown.length === 1 && currprov === null ){
             self.setProvince(shown[0]);
-        } else if (shown.length > 1 && currentProvince() ){
-            console.log( shown.length );
-            self.setProvince( currentProvince() );
-        } else {
-            console.log( currentProvince() );
+        } else if (shown.length > 1 && currprov ){
+            self.setProvince( currprov );
         }
 
         return shown;
@@ -45,67 +47,31 @@ var Translators = function(){
     self.setProvince = function(provinceClicked){
 
         // if current != null --> close current
-        if ( currentProvince() !== null ) {
-            self.currentProvince().infowindow.close();
-            self.currentProvince().marker.icon.fillColor = defaultIcon;
-            self.currentProvince().marker.setMap(provinceClicked.marker.map);
+        if ( currentProvince !== null ) {
+            currentProvince.infowindow.close();
+            currentProvince.marker.icon.fillColor = defaultIcon;
+            currentProvince.marker.setMap(provinceClicked.marker.map);
+            previousProvince = currentProvince;
         }
 
         // if clicked province was already the current province, deselect it
-        if ( currentProvince() === provinceClicked ) {
-            self.currentProvince(null);
-        } else if ( currentProvince() === null || provinceClicked != currentProvince() ){
+        if ( currentProvince === provinceClicked ) {
+            currentProvince = null;
+            setProvinceColor( currentProvince );
+            previousProvince = provinceClicked;
+
+        } else if ( currentProvince === null || provinceClicked != currentProvince ){
         // finally, if current == null OR if clicked != current, open clicked
             provinceClicked.marker.icon.fillColor = selectedIcon;
             provinceClicked.marker.setMap(provinceClicked.marker.map);
 
-            // update currentProvince
-            currentProvince(provinceClicked);
-            // provinceIsSelected(true);
+            // update previous and currentProvince
+            currentProvince = provinceClicked;
+            setProvinceColor( currentProvince );
 
             // open infowindow
             openInfowindow(provinceClicked);
         }
-
-
-
-
-
-
-
-
-        // If an infowindow was already open, close it.
-        // if ( currentProvince() ) {
-        //     console.log( "not null (close)");
-        //     // If user clicks on the same marker again, close it & return.
-        //     if (currentProvince() === provinceClicked ) {
-        //         console.log( "same marker (close)" );
-        //         self.currentProvince().infowindow.close();
-        //         self.currentProvince().marker.icon.fillColor = defaultIcon;
-        //         self.currentProvince().marker.setMap(provinceClicked.marker.map);
-
-        //         // also update current province and selected province
-        //         self.currentProvince(null);
-        //         self.provinceIsSelected(false);
-        //     }
-        // // If nothing was selected, only open an infowindow.
-        // } else {
-        //     console.log( "open!" );
-        //     // update to selected marker.
-        //     provinceClicked.marker.icon.fillColor = selectedIcon;
-        //     provinceClicked.marker.setMap(provinceClicked.marker.map);
-
-        //     // update currentProvince
-        //     currentProvince(provinceClicked);
-        //     provinceIsSelected(true);
-
-        //     // open infowindow
-        //     openInfowindow(provinceClicked);
-        // }
-    }
-
-    self.filterProvinces = function(){
-        console.log("Provinces filtering");
     }
 
     // This function changes marker colour, sets infowindow content & opens infowindow.
