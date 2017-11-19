@@ -19,8 +19,8 @@
             <input class='search' type="text" placeholder="ex. 'prov' or 'qu'" data-bind="textInput: provinceSearch">
             <ul data-bind="foreach: shownLocations">
                 <li data-bind="text: $data.title, click: setProvince, style: {
-                    backgroundColor: currentProvince() === $data ? 'red' : 'white',
-                    color: currentProvince() === $data ? 'white' : 'black' }"></li>
+                    backgroundColor: setProvinceColor() === $data ? 'red' : 'white',
+                    color: setProvinceColor() === $data ? 'white' : 'black' }"></li>
             </ul>
         </div>
         <hr>
