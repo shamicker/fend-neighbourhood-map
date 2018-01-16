@@ -19,12 +19,12 @@ var Translators = function(){
     var previousProvince = currentProvince;
 
     // the user's provincial search query
-    self.provinceSearch = ko.observable('');
+    self.provinceFilter = ko.observable('');
 
     // Creates a list of shown locations
     self.shownLocations = ko.computed(function(){
         var currprov = currentProvince;
-        var query = self.provinceSearch();
+        var query = self.provinceFilter();
         var shown = model.mapData.allLocations.filter(function(location){
             return location.title.toLowerCase().indexOf(query) >= 0;
         });
@@ -54,14 +54,14 @@ var Translators = function(){
             previousProvince = currentProvince;
         }
 
-        // if clicked province was already the current province, deselect it
+        // then if clicked province was already the current province, deselect it
         if ( currentProvince === provinceClicked ) {
             currentProvince = null;
             setProvinceColor( currentProvince );
             previousProvince = provinceClicked;
 
-        } else if ( currentProvince === null || provinceClicked != currentProvince ){
         // finally, if current == null OR if clicked != current, open clicked
+        } else if ( currentProvince === null || provinceClicked != currentProvince ){
             provinceClicked.marker.icon.fillColor = selectedIcon;
             provinceClicked.marker.setMap(provinceClicked.marker.map);
 
@@ -70,15 +70,9 @@ var Translators = function(){
             setProvinceColor( currentProvince );
 
             // open infowindow
-            openInfowindow(provinceClicked);
+            provinceClicked.infowindow.setContent(infoBefore + provinceClicked.title + infoAfter);
+            provinceClicked.infowindow.open(map, provinceClicked.marker);
         }
-    }
-
-    // This function changes marker colour, sets infowindow content & opens infowindow.
-    // It is called when a marker is clicked, AND when the matching province-list-item is selected.
-    self.openInfowindow = function(provinceClicked){
-        provinceClicked.infowindow.setContent(infoBefore + provinceClicked.title + infoAfter);
-        provinceClicked.infowindow.open(map, provinceClicked.marker);
     }
 
     // SPECIES STUFF

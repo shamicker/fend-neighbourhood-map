@@ -32,7 +32,7 @@ li:hover {
 }
 
 .body {
-    border: 1px solid purple;
+    /*border: 1px solid purple;*/
     display: flex;
     flex-flow: row wrap;
 }
@@ -41,26 +41,30 @@ li:hover {
     flex: 1 100%;
 }
 
-.instructions {
+.info {
     border: 2px solid limegreen;
     flex: 1 100%;
     padding: 10px;
 }
 
 .menu {
-    border: 2px solid orange;
+    border: 1px solid blue;
     flex: 1 25%;
     padding: 0 10px;
+    overflow: hidden;
+    height: 700px;
 }
 
 .footer {
-    border: 2px solid black;
+    /*border: 2px solid black;*/
     flex: 1 100%;
     padding: 10px;
 }
 
 #map {
-    border: 2px solid blue;
+    border: 1px solid blue;
     flex: 3 70%;
-    height: 650px;
+    height: 700px;
+    position: relative;
+    overflow: hidden;
 }

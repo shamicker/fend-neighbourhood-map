@@ -4,7 +4,7 @@ var model = {
         title: "Map of My Neighbourhood (of the World), eh?",
         instructions: "For each province or territory in Canada, this map can show information" +
         " on over 70,000 of the plant and animal species of US and Canada.",
-        provinceSearch: "Use this box to filter through the provinces and territories.",
+        provinceFilter: "Use this box to filter through the provinces and territories.",
         speciesSearch: "Search for a species!\n  You can use common or scientific names.\n  `*` is a wildcard.",
         natureserveAcknowledgement: "This information is provided by NatureServe (www.natureserve.org) and its network of natural heritage member programs, a leading source of information about rare and endangered species, and threatened ecosystems."
     },

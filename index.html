@@ -12,11 +12,11 @@
 </head>
 <body class="body">
     <h1 class="header" data-bind="text: title">Map of My Neighbourhood</h1>
-    <div class="instructions" data-bind="text: instructions">Please enable JavaScript.</div>
+    <div class="info" data-bind="text: instructions">Please enable JavaScript.</div>
     <div class="menu">
         <div class="provinces">
-            <p data-bind="text: provinceSearchText">Search for a location here.</p>
-            <input class='search' type="text" placeholder="ex. 'prov' or 'qu'" data-bind="textInput: provinceSearch">
+            <p data-bind="text: provinceFilterText">Search for a location here.</p>
+            <input class='search' type="text" placeholder="ex. 'prov' or 'qu'" data-bind="textInput: provinceFilter">
             <ul data-bind="foreach: shownLocations">
                 <li data-bind="text: $data.title, click: setProvince, style: {
                     backgroundColor: setProvinceColor() === $data ? 'red' : 'white',
@@ -33,6 +33,7 @@
         </div>
     </div>
     <div id="map">Map here.</div>
+    <div class="info" id="info">Species info here.</div>
     <div class="footer">
         <p class="acknowledgement" data-bind="text: acknowledgement"></p>
     </div>

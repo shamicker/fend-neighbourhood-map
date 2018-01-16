@@ -5,7 +5,7 @@ var staticView = function(){
     console.log("Static View Populated");
     this.title = model.text.title;
     this.instructions = model.text.instructions;
-    this.provinceSearchText = model.text.provinceSearch;
+    this.provinceFilterText = model.text.provinceFilter;
     this.speciesSearchText = model.text.speciesSearch;
     this.acknowledgement = model.text.natureserveAcknowledgement;
 
@@ -32,8 +32,7 @@ var MapView = function(locations){
     var mapDiv = document.getElementById('map');
 
     var map = new google.maps.Map(mapDiv, startPoint);
-    var searchService = new google.maps.places.PlacesService(map);
-    var infowindow = new google.maps.InfoWindow();
+    var infowindow = new google.maps.InfoWindow;
 
     // For each location, create a map marker.
     for (var i = 0; i < locations.length; i++ ){
@@ -64,3 +63,25 @@ var MapView = function(locations){
         markersList.push(marker);
     }
 };
+
+var SpeciesView = function(data){
+    var url = 'https://services.natureserve.org/idd/rest/ns/v1/globalSpecies/list/nameSearch?name='
+                + 'Ruby*' + '&NSAccessKeyId=b68c931e-0647-4dc3-bbfe-04139e176a51';
+    function downloadUrl(url, callback){
+        var request = window.ActiveXObject ?
+            new ActiveXObject("Microsoft.XMLHTTP") :
+            new XMLHttpRequest;
+
+        request.onreadystatechange = function(){
+            if (reqeust.readyState == 4){
+                request.onreadystatechange = noNothing;
+                callback(request, request.status);
+            }
+        };
+
+        request.open('GET', url, true);
+        request.send(null);
+    }
+    // function downloadUrl()
+};
+
